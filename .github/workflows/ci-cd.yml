@@ -47,10 +47,10 @@ jobs:
           password: ${{ secrets.DOCKERHUB_TOKEN }}
 
       - name: Build and push Docker image
-        uses: docker/build-push-action@v5
-        with:
-          context: .
-          file: ./Dockerfile
-          push: true
-          tags: your-dockerhub-username/flask-app:latest
+        run: |
+         docker buildx build \
+            --file content/Dockerfile \
+            --tag your-dockerhub-username/flask-app:latest \
+            --push .
+
           
